@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Edu+NSW+ACT+Foundation:wght@500&family=Handlee&display=swap');
+
+.App {
+  text-align: center;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+input {
+  width: 250px;
+  height: 25px;
+  border: 2px solid black;
+}
+
+select {
+  margin-left: 10px;
+  width: 100px;
+  height: 30px;
+  border: 2px solid black;
+  text-align: center;
+}
+
+button {
+  margin-left: 10px;
+  width: 70px;
+  height: 30px;
+  border: 2px solid black;
+  cursor: pointer;
+}
+button:hover {
+  background-color: rgb(168, 0, 168);
+  color: white;
+}
+
+.list {
+  list-style: none;
+  margin-top: 50px;
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: 'Edu NSW ACT Foundation', cursive;
+  font-family: 'Handlee', cursive;
+  font-size: 18px;
+}
+.list li {
+  border-bottom :1px solid black;
+  padding: 10px 0;
+  display: flex;
+  justify-content: space-between;
+}
+.list span {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+}
+.list strong {
+  padding: 0 5px;
+  flex: 0.3;
+  margin-right: 30px;
+}
+.list b{
+  margin-right: 30px;
+  cursor: pointer;
+}
+.list b:hover {
+  background-color: blue;
+}
+
+.alertInput {
+  background-color: red;
+}
+.alertStatus {
+  background-color: red;
+}
+
+.status1 {
+  background-color: red;
+}
+.status2 {
+  background-color: orange;
+}
+.status3 {
+  background-color: yellow;
+}
