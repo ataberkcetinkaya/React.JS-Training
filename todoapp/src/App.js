@@ -60,8 +60,6 @@ function App() {
             ...list
           ]);
 
-          //localStorage.setItem('todos', JSON.stringify(todos)); //save the todos list to local storage
-
           setInputData('');  //clear the input field
           setSelectData(''); //clear the select field
           setAlert(false); //back to default false statement
@@ -87,9 +85,17 @@ function App() {
     }
 
     useEffect(() => {
-      localStorage.getItem("todos");
+      if(todos.length > 0) {
+        localStorage.setItem("todos", JSON.stringify(todos));
+      }
     }, [todos]);
 
+    useEffect(() => {
+      const localData = localStorage.getItem("todos");
+      const parseLocalData = JSON.parse(localData);
+      setTodos(parseLocalData || []);
+    }, []);
+   
   return (
     <div className="App">
       <div className='container'>
@@ -119,7 +125,7 @@ function App() {
       <ul className='list'>
         {
           todos.map((todo, index) =>
-          <li>
+          <li key={index}>
             <span>{todo.name}</span>
             <strong className={todo.status === '1' ? 'status1' : todo.status === '2' ? 'status2' : 'status3'}>{todo.status}</strong>
             <b className='liBtn'>Delete</b>
