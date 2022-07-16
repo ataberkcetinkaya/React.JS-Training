@@ -1,7 +1,10 @@
 import './App.css';
-import { useState, useEffect  } from 'react';
+import { useState, useEffect, useRef  } from 'react';
 
 function App() {
+
+  const inputRef = useRef(); // useRef() is a hook that returns a mutable ref object with a single mutable property 'current'
+  const selectRef = useRef();
 
   const [inputData, setInputData] = useState('');
   const [selectData, setSelectData] = useState('');
@@ -68,16 +71,16 @@ function App() {
         }
         
 
-    const changeAlert = e => {
-      setSelectData(e.target.value) //remove the red background if the user adds the item
+    const changeAlert = () => {
+      setSelectData(selectRef.current.value) //remove the red background if the user adds the item
       setAlert(alert => ({ //only change the part when the user types or selects something on it
         ...alert,
         status:false
       }))
     }
 
-    const changeAlertForInput = e => {
-      setInputData(e.target.value) //remove the red background if the user adds the item
+    const changeAlertForInput = () => {
+      setInputData(inputRef.current.value) //reaching to value with useRef() hook, as it names inputRef I gave.
       setAlert(alert => ({ //only change the part when the user types or selects something on it
         ...alert,
         name:false
@@ -93,23 +96,35 @@ function App() {
     useEffect(() => {
       const localData = localStorage.getItem("todos");
       const parseLocalData = JSON.parse(localData);
-      setTodos(parseLocalData || []);
+      setTodos(parseLocalData || []); //if data is undefined, set it to an empty array
     }, []);
+
+
+    // const [deleteTodo, setDeleteTodo] = useState('');
+    // //DELETE
+    // const deleteItem = (id) => {
+    //   const removeItem = todos.filter((todo) => {
+    //     return todo.name !== id;
+    //   });
+    //   setTodos(removeItem);
+    // }
    
   return (
     <div className="App">
       <div className='container'>
         <input
+          ref = {inputRef}
           value={inputData}
           className={alert.name ? 'alertInput' : ''}
           type="text" 
           placeholder="Type something..."
-          onChange={(e) => changeAlertForInput(e)}>
+          onChange={changeAlertForInput}>
         </input>
         <select 
+        ref = {selectRef}
         value={selectData}
         className={alert.status ? 'alertStatus' : ''}
-        onChange={(e) => changeAlert(e)}>
+        onChange={changeAlert}>
           <option value="">Choose</option>
           <option value="1">1st</option>
           <option value="2">2nd</option>
