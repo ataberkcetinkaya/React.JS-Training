@@ -100,14 +100,13 @@ function App() {
     }, []);
 
 
-    // const [deleteTodo, setDeleteTodo] = useState('');
-    // //DELETE
-    // const deleteItem = (id) => {
-    //   const removeItem = todos.filter((todo) => {
-    //     return todo.name !== id;
-    //   });
-    //   setTodos(removeItem);
-    // }
+     //DELETE
+     const deleteItem = (index) => {
+        const newTodos = [...todos];
+        newTodos.splice(index, 1); //splice(index, how many items)
+        setTodos(newTodos); //set the newTodos array to the states
+        localStorage.setItem("todos", JSON.stringify(newTodos));
+      };
    
   return (
     <div className="App">
@@ -143,7 +142,7 @@ function App() {
           <li key={index}>
             <span>{todo.name}</span>
             <strong className={todo.status === '1' ? 'status1' : todo.status === '2' ? 'status2' : 'status3'}>{todo.status}</strong>
-            <b className='liBtn'>Delete</b>
+            <b onClick={() => deleteItem(index)} className='liBtn'>Delete</b>
           </li>
         )}
       </ul>
