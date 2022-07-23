@@ -1,11 +1,10 @@
 import React from 'react'
 import "./Home.css"
-import Login from '../components/Login'
 
-const Home = () => {
+const Home = ({ user  }) => {
   return (
     <div className='home'>
-        <Login />
+      <div>Welcome {user}!</div>
     </div>
   )
 }

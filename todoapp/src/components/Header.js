@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Header = () => {
+const Header = ({ user, logOut }) => {
   return (
     <div className='header'>
         <ul>
@@ -13,7 +13,8 @@ const Header = () => {
             </li>
         </ul>
         <span>
-            Name
+            {user}
+            <button onClick={logOut}>Log Out</button>
         </span>
     </div>
   )

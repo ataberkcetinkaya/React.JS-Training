@@ -1,6 +1,6 @@
 import React from 'react'
 
-const AddTodos = ({ //props to set
+const AddTodos = ({ //props to set (parameters)
     inputRef,
     inputData,
     changeAlertForInput,

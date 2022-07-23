@@ -1,10 +1,21 @@
-import React from 'react'
+import React, { useRef } from 'react'
 
-const Login = () => {
+const Login = ({ login }) => {
+  
+  const inputRef = useRef();
+
+  const submit = () => {
+      if((inputRef.current.value).length > 2) {
+        login(inputRef.current.value)
+      } else {
+        alert("Must be at least 3 characters")
+      }
+    }
+
   return (
     <div className='login'>
-        <input type="text" placeholder='Username...'></input>
-        <button style={{marginTop: "10px"}}>Login</button>
+        <input ref={inputRef} type="text" placeholder='Username...'></input>
+        <button onClick={submit} style={{marginTop: "10px"}}>Login</button>
     </div>
   )
 }
