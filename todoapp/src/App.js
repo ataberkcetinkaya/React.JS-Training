@@ -31,8 +31,7 @@ function App() {
     } else if(!localStorage.getItem("user")) {
       setIsAuth(false);
     }
-  }, [isAuth]);
-  
+  }, []);
 
   //setting the statements to elements in the DOM below!!! Just like, user={user}
   //isAuth ? means if the user is logged in show those pages if not show that page after ':'

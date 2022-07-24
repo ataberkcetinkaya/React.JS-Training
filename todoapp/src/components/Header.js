@@ -14,7 +14,7 @@ const Header = ({ user, logOut }) => {
         </ul>
         <span>
             {user}
-            <button onClick={logOut}>Log Out</button>
+            <button onClick={logOut}><Link to="/" className='linkBtn'>Log Out</Link></button>
         </span>
     </div>
   )
