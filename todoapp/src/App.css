@@ -92,8 +92,6 @@ button:hover {
 }
 
 .header {
-  background: blue;
-  color: white;
   padding: 20px;
   margin-bottom: 20px;
   display: flex;
@@ -119,4 +117,28 @@ a {
 .linkBtn {
   text-decoration: none;
   color:black;
+}
+
+.changeTemplate {
+  background-color: white;
+  display: inline-flex;
+  width: 65px;
+  height: 25px;
+}
+.changeTemplate b {
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
+  margin: 2px 1px;
+  cursor: pointer;
+}
+.changeTemplate .yellow {
+  background-color: yellow;
+
+}
+.changeTemplate .blue {
+  background-color: blue;
+}
+.changeTemplate .red {
+  background-color: red;
 }

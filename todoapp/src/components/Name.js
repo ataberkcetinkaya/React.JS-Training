@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import OptionContext from '../context/OptionContext';
 
 const Name = ({ user }) => {
+  const { template } = useContext(OptionContext);
   return (
     <>
-    {user}
+    <span style={{color: template.color}}>{user}</span>
     </>
   )
 }

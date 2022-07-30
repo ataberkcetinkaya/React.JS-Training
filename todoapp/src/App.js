@@ -9,10 +9,32 @@ import Footer from './components/Footer';
 import AuthContext from './context/AuthContext';
 import OptionContext from './context/OptionContext';
 
+const templates = {
+    yellow: {
+      color: 'black',
+      background: 'yellow'
+    },
+    blue: {
+      color: 'white',
+      background: 'blue'
+    },
+    red: {
+      color: 'white',
+      background: 'red'
+    }
+}
+
 function App() {
   
   const [user, setUser] = useState('');
   const [isAuth, setIsAuth] = useState(false); //check if the user is logged in
+
+  const [template, setTemplate] = useState(
+    {
+      color: 'white',
+      background: 'blue'
+    }
+  ); //default template
 
   const logout = (data) => {
     setUser(''); //clear the user info
@@ -43,9 +65,15 @@ function App() {
     user, login, logout
   }
 
+  const changeTemplate = value => {
+    setTemplate(templates[value]); //setting the template to the value of the select, careful about the square brackets []
+  }
+
   const OptionContextValues = {
     color: 'red',
-    size: 32
+    size: 32,
+    template,
+    changeTemplate
   }
 
   //Via <AuthContext.Provider> we wrap up the whole app and pass the values to it we wanna use anywhere.
