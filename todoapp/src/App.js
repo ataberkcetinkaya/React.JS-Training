@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react';
 import Login from './components/Login';
 import Footer from './components/Footer';
 import AuthContext from './context/AuthContext';
+import OptionContext from './context/OptionContext';
 
 function App() {
   
@@ -38,36 +39,43 @@ function App() {
   //isAuth ? means if the user is logged in show those pages if not show that page after ':'
   //isAuth && means if its true
 
+  const AuthContextValues = {
+    user, login, logout
+  }
+
+  const OptionContextValues = {
+    color: 'red',
+    size: 32
+  }
 
   //Via <AuthContext.Provider> we wrap up the whole app and pass the values to it we wanna use anywhere.
-  //I send the values inside the AuthContextValue object above. (btw if the key and value are the same name, we can just write the key like user, login etc...)
+  //I send the values inside the AuthContextValues object above. (btw if the key and value are the same name, we can just write the key like user, login etc...)
+  // Another info: OptionContext can use the values of AuthContext but AuthContext can NOT use the values of OptionContext because AuthContext is outside of OptionContext.
   return (
    <>
-   <AuthContext.Provider value={{
-      user,
-      login,
-      logout
-   }}>
-      {
-        isAuth &&
-        <Header user={user} logout={logout}/>
-      }
-      <Routes>
+   <AuthContext.Provider value={AuthContextValues}>
+    <OptionContext.Provider value={OptionContextValues}>
         {
-          isAuth ? 
-          <>
-          <Route exact path='/' element={<Home user={user}/>}></Route>
-          <Route exact path='/list' element={<List user={user}/>}></Route>
-          </>
-          :
-          <Route exact path='/' element={<Login login={login}/>}></Route>
+          isAuth &&
+          <Header />
         }
-      </Routes>
+        <Routes>
+          {
+            isAuth ? 
+            <>
+            <Route exact path='/' element={<Home user={user}/>}></Route>
+            <Route exact path='/list' element={<List />}></Route>
+            </>
+            :
+            <Route exact path='/' element={<Login login={login}/>}></Route>
+          }
+        </Routes>
 
-      {
-        isAuth &&
-        <Footer user={user} logout={logout}/>
-      }
+        {
+          isAuth &&
+          <Footer />
+        }
+      </OptionContext.Provider>
     </AuthContext.Provider>
    </>
   );

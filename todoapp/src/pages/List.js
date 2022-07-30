@@ -1,7 +1,8 @@
 import '../App.css';
-import { useState, useEffect, useRef  } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 import AddTodos from '../components/AddTodos';
 import Todos from '../components/Todos';
+import OptionContext from '../context/OptionContext';
 
 function List() {
 
@@ -16,6 +17,9 @@ function List() {
     status: false
   });
   const [alertText, setAlertText] = useState(''); //state for the min 3 characters alert text inside <p>
+
+  //Context API
+  const { color, size } = useContext(OptionContext);
 
   const addItems = () => {
     //FIRST STAGE - Adding the items without any alerts
@@ -53,7 +57,7 @@ function List() {
         setAlert({
           name: true
         })
-        setAlertText('Must be at least 3 characters');
+        setAlertText(<span style={{color: color, fontSize: size}}>Min 3 Characters!</span>); //Context API
       }
       else if(inputData.length >= 3)
          { 
