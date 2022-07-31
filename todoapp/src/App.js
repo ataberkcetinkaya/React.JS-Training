@@ -102,11 +102,11 @@ function App() {
           {
             isAuth ? 
             <>
-            <Route exact path='/' element={<Home user={user}/>}></Route>
-            <Route exact path='/list' element={<List />}></Route>
+            <Route exact path='/' element={<Home/> }></Route>
+            <Route exact path='/list' element={<List/> }></Route>
             </>
             :
-            <Route exact path='/' element={<Login login={login}/>}></Route>
+            <Route exact path='/' element={<Login/> }></Route>
           }
         </Routes>
 

@@ -1,6 +1,9 @@
-import React, { useRef } from 'react'
+import React, { useRef, useContext } from 'react'
+import AuthContext from '../context/AuthContext';
 
-const Login = ({ login }) => {
+const Login = () => {
+
+  const { login } = useContext(AuthContext);
   
   const inputRef = useRef();
 

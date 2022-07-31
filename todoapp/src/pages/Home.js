@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import "./Home.css"
+import AuthContext from '../context/AuthContext';
 
-const Home = ({ user  }) => {
+const Home = () => {
+
+  const { user } = useContext(AuthContext);
+
   return (
     <div className='home'>
       <div>Welcome {user}!</div>
