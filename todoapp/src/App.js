@@ -57,17 +57,24 @@ function App() {
     }
   }, []);
 
-  //setting the statements to elements in the DOM below!!! Just like, user={user}
-  //isAuth ? means if the user is logged in show those pages if not show that page after ':'
-  //isAuth && means if its true
-
+  
   const AuthContextValues = {
     user, login, logout
   }
 
   const changeTemplate = value => {
     setTemplate(templates[value]); //setting the template to the value of the select, careful about the square brackets []
+    //console.log(templates[value].background);
+    localStorage.setItem("template", templates[value].background); //setting the template to localStorage
   }
+
+  useEffect(() => { //handling the template's background color from localStorage
+    if(localStorage.getItem("template")) {
+      setTemplate(templates[localStorage.getItem("template")]);
+    } else if(!localStorage.getItem("template")) {
+      setTemplate(templates.blue);
+    }
+  }, []);
 
   const OptionContextValues = {
     color: 'red',
@@ -75,6 +82,10 @@ function App() {
     template,
     changeTemplate
   }
+
+  //setting the statements to elements in the DOM below!!! Just like, user={user}
+  //isAuth ? means if the user is logged in show those pages if not show that page after ':'
+  //isAuth && means if its true
 
   //Via <AuthContext.Provider> we wrap up the whole app and pass the values to it we wanna use anywhere.
   //I send the values inside the AuthContextValues object above. (btw if the key and value are the same name, we can just write the key like user, login etc...)
