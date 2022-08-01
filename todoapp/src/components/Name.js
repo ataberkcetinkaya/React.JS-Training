@@ -1,8 +1,9 @@
 import React, { useContext } from 'react'
-import OptionContext from '../context/OptionContext';
+import OptionContext, { useOption } from '../context/OptionContext';
 
 const Name = ({ user }) => {
-  const { template } = useContext(OptionContext);
+  const { template } = useContext(OptionContext); //previous usage before useOption()
+
   return (
     <>
     <span style={{color: template.color}}>{user}</span>

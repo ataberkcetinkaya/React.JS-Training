@@ -2,13 +2,11 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import Name from './Name';
 import Logout from './Logout';
-import AuthContext from '../context/AuthContext';
-import OptionContext from '../context/OptionContext';
+import OptionContext, { useOption } from '../context/OptionContext';
 import ChangeTemplate from './ChangeTemplate';
 
 const Header = () => {
-  const { logout } = useContext(AuthContext);
-  const { template } = useContext(OptionContext);
+  const { template } = useContext(OptionContext); //previous usage before useOption()
 
   return (
     <div className='header' style={{backgroundColor: template.background}}>
@@ -23,7 +21,7 @@ const Header = () => {
         <ChangeTemplate></ChangeTemplate>
         <span >
             <Name ></Name>
-            <Logout logout={logout}></Logout>
+            <Logout ></Logout>
         </span>
     </div>
   )

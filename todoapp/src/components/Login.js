@@ -1,9 +1,11 @@
 import React, { useRef, useContext } from 'react'
-import AuthContext from '../context/AuthContext';
+import {AuthContext} from '../context/AuthContext';
+import {useAuth} from '../context/AuthContext';
 
 const Login = () => {
 
-  const { login } = useContext(AuthContext);
+  //const { login } = useContext(AuthContext); //previous usage before useAuth()
+  const { login } = useAuth();
   
   const inputRef = useRef();
 

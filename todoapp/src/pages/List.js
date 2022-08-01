@@ -3,6 +3,7 @@ import { useState, useEffect, useRef, useContext } from 'react';
 import AddTodos from '../components/AddTodos';
 import Todos from '../components/Todos';
 import OptionContext from '../context/OptionContext';
+import useOption from '../context/OptionContext';
 
 function List() {
 
@@ -19,7 +20,8 @@ function List() {
   const [alertText, setAlertText] = useState(''); //state for the min 3 characters alert text inside <p>
 
   //Context API
-  const { color, size } = useContext(OptionContext);
+  const { color, size } = useContext(OptionContext); //previous usage before useOption()
+
 
   const addItems = () => {
     //FIRST STAGE - Adding the items without any alerts
