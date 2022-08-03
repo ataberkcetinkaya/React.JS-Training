@@ -6,7 +6,8 @@ import OptionContext, { useOption } from '../context/OptionContext';
 import ChangeTemplate from './ChangeTemplate';
 
 const Header = () => {
-  const { template } = useContext(OptionContext); //previous usage before useOption()
+  //const { template } = useContext(OptionContext); //previous usage before useOption()
+  const { template } = useOption();
 
   return (
     <div className='header' style={{backgroundColor: template.background}}>

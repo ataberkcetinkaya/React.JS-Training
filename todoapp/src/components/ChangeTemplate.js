@@ -3,7 +3,8 @@ import OptionContext from '../context/OptionContext';
 import useOption from '../context/OptionContext';
 
 const ChangeTemplate = () => {
-    const { changeTemplate } = useContext(OptionContext);  //previous usage before useOption()
+    //const { changeTemplate } = useContext(OptionContext);  //previous usage before useOption()
+    const { changeTemplate } = useOption();
 
   return (
     <div className='changeTemplate'>

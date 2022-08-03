@@ -19,7 +19,7 @@ const Login = () => {
 
   return (
     <div className='login'>
-        <input ref={inputRef} type="text" placeholder='Username...'></input>
+        <input  type="text" placeholder='Username...'></input>
         <button onClick={submit} style={{marginTop: "10px"}}>Login</button>
     </div>
   )

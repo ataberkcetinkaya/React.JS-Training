@@ -9,8 +9,8 @@ const Footer = () => {
   //const { logout } = useContext(AuthContext); //previous usage before useAuth()
   const { logout } = useAuth();
 
-  const { template } = useContext(OptionContext); //previous usage before useOption()
-
+  //const { template } = useContext(OptionContext); //previous usage before useOption()
+  const { template } = useOption();
 
   return (
     <div className='header' style={{backgroundColor: template.background}}>

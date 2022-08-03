@@ -20,7 +20,8 @@ function List() {
   const [alertText, setAlertText] = useState(''); //state for the min 3 characters alert text inside <p>
 
   //Context API
-  const { color, size } = useContext(OptionContext); //previous usage before useOption()
+  //const { color, size } = useContext(OptionContext); //previous usage before useOption()
+  const { color, size } = useOption();
 
 
   const addItems = () => {
