@@ -3,7 +3,7 @@ import { useState, useEffect, useRef, useContext } from 'react';
 import AddTodos from '../components/AddTodos';
 import Todos from '../components/Todos';
 import OptionContext from '../context/OptionContext';
-import useOption from '../context/OptionContext';
+import {useOption} from '../context/OptionContext';
 
 function List() {
 

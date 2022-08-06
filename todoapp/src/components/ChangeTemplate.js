@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import OptionContext from '../context/OptionContext';
-import useOption from '../context/OptionContext';
+import {useOption} from '../context/OptionContext';
 
 const ChangeTemplate = () => {
     //const { changeTemplate } = useContext(OptionContext);  //previous usage before useOption()
