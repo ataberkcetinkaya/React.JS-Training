@@ -5,7 +5,7 @@ import '../App.css';
 const WeatherService = () => {
   //openweathermap.org
   const url = 'https://api.openweathermap.org/data/2.5/weather?q=';
-  const apiKey = process.env.REACT_APP_WEATHER_API_KEY;
+  const apiKey = '41defbbdb2ac1f0c77ea9fdc82847c6d';
 
   const [weather, setWeather] = useState({});
   const inputRef = useRef(null);
