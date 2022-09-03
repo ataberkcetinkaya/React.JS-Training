@@ -9,11 +9,15 @@ const WeatherService = () => {
 
   const [weather, setWeather] = useState({});
   const inputRef = useRef(null);
+  const [picture, setPicture] = useState('');
 
   const getWeather = async () => {
       const { data } = await axios.get(`${url}${inputRef.current.value}&appid=${apiKey}&units=metric`) //wait for data to reach (async and await)
       setWeather(data);
-  }
+      let info = data.weather[0].icon; //01d
+      setPicture(info);
+      console.log(info);
+    }
 
 
   //if weather exists, map through weather array and display main weather
@@ -23,11 +27,6 @@ const WeatherService = () => {
         <input ref={inputRef} type="text" className='bg-yellow-300 placeholder bg-black text-white w-64 h-10 border-solid border-2 border-black mr-3' placeholder='  Type city...'></input>
         <button onClick={() => getWeather()} className='w-24 border-solid bg-black text-white border-2 border-black'>Search</button>
       </div>
-      {/* <div className="flex flex-col text-center mt-5 text-2xl">
-        <h3 className='mt-5'>{weather.name}</h3>
-        {weather.weather && weather.weather.map(w => <h3 className='mt-2' key={w.id}>{w.main}</h3>)} 
-        <h3 className='mt-2'>{weather?.main?.temp}</h3>        
-      </div> */}
       
       <div class="ml-24 mr-24 flex justify-center w-auto mt-12">
           <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
@@ -42,6 +41,9 @@ const WeatherService = () => {
                       <th scope="col" class="py-3 px-6">
                           Temperature (°C)
                       </th>
+                      <th scope="col" class="py-3 px-6">
+                         Picture
+                      </th>
                   </tr>
               </thead>
               <tbody>
@@ -54,6 +56,9 @@ const WeatherService = () => {
                       </td>
                       <td class="py-4 px-6">
                         {weather?.main?.temp}
+                      </td>
+                      <td class="py-4 px-6">
+                        <img src={`http://openweathermap.org/img/wn/${picture}.png`} alt=""/>
                       </td>
                   </tr>
               </tbody>
