@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import axios from 'axios'
 import '../App.css';
+import { CalendarDaysIcon, ClockIcon } from '@heroicons/react/24/solid'
 
 const WeatherService = () => {
   //openweathermap.org
@@ -63,7 +64,7 @@ const WeatherService = () => {
               </thead>
               <tbody>
                   <tr className="border-b bg-gray-800 border-slate-400 text-center ">
-                      <th scope="row" className="py-4 px-6 font-medium  whitespace-nowrap text-white">
+                      <th scope="row" className="py-4 px-6 font-medium  whitespace-normal text-white">
                         {weather.name}
                       </th>
                       <td className="py-4 px-6 text-white">
@@ -85,8 +86,9 @@ const WeatherService = () => {
             <tbody>
               <thead className="text-xs uppercase">
                   <tr>
-                      <th className="bg-gray-800 text-white py-4 px-6">
+                      <th className="bg-gray-800 text-white py-4 px-6 border border-slate-400">
                           Weather for Next Hours
+                          <ClockIcon className='h-7 w-7 mx-auto mt-3'></ClockIcon>
                       </th>
                   </tr>
               </thead>
@@ -107,13 +109,14 @@ const WeatherService = () => {
           </table>
         </div>
 
-        <div className="ml-24 mr-24 mt-12">
+        <div className="ml-24 mr-24 mt-12 ">
           <table className="w-full text-sm ">
           <tbody>
-              <thead className="text-xs uppercase">
+              <thead className="text-xs uppercase ">
                   <tr>
-                      <th className="py-4 px-6 bg-gray-800 text-white">
+                      <th className="py-4 px-6 bg-gray-800 text-white border border-slate-400 ">
                           Daily Weather for 5 Days
+                          <CalendarDaysIcon className="h-7 w-7 mx-auto mt-3"></CalendarDaysIcon>
                       </th>
                   </tr>
               </thead>
@@ -122,8 +125,8 @@ const WeatherService = () => {
               <tbody>
                 {Object.keys(daily).map((key, index) => {
                   return (
-                  <tr className="border-b bg-gray-800">
-                      <div className='h-20 text-center mt-5 border border-slate-400 text-white'>
+                  <tr className="border-b border-slate-400 bg-gray-800">
+                      <div className='h-20 text-center mt-5 text-white'>
                         <h3 className='mt-2'>{daily[key].dt_txt}</h3>
                         <h3 className='mt-2'>{daily[key].main.temp}°C</h3>
                       </div> 
