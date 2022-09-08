@@ -39,6 +39,9 @@ const WeatherService = () => {
     <>
       <div className="flex justify-center mt-5">
         <input ref={inputRef} type="text" className='bg-black text-white w-64 h-10 border-solid border-2 border-slate-400 mr-3' placeholder='  Type city...'></input>
+      </div>
+
+      <div className="flex justify-center mt-5  h-10">
         <button onClick={() => getWeather()} className='w-24 border-solid bg-black text-white border-2 border-slate-400'>Current</button>
         <button onClick={() => getForecast()} className='ml-5 w-28 border-solid bg-black text-white border-2 border-slate-400'>Next Hours</button>
         <button onClick={() => getDaily()} className='ml-5 w-28 border-solid bg-black text-white border-2 border-slate-400'>Get Daily</button>
@@ -87,7 +90,7 @@ const WeatherService = () => {
               <thead className="text-xs uppercase">
                   <tr>
                       <th className="bg-gray-800 text-white py-4 px-6 border border-slate-400">
-                          Weather for Next Hours
+                          Next Hours
                           <ClockIcon className='h-7 w-7 mx-auto mt-3'></ClockIcon>
                       </th>
                   </tr>
@@ -115,7 +118,7 @@ const WeatherService = () => {
               <thead className="text-xs uppercase">
                   <tr>
                     <th className="py-4 px-6 bg-gray-800 text-white border border-slate-400">
-                        Daily Weather for 5 Days
+                        Daily Weather
                         <CalendarDaysIcon className="h-7 w-7 mx-auto mt-3"></CalendarDaysIcon>
                       </th>
                   </tr>
@@ -126,8 +129,8 @@ const WeatherService = () => {
                 {Object.keys(daily).map((key, index) => {
                   return (
                   <tr className="border-b border-slate-400 bg-gray-800">
-                      <div className='h-20 text-center mt-5 border border-slate-400 text-white'>
-                        <h3 className='mt-2'>{daily[key].dt_txt}</h3>
+                      <div className='h-20 text-center mt-5 text-white'>
+                        <h3 className='mt-2'>{daily[key].dt_txt.slice(0,10)}</h3>
                         <h3 className='mt-2'>{daily[key].main.temp}°C</h3>
                       </div> 
                   </tr>
