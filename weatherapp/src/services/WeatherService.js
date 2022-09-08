@@ -37,15 +37,15 @@ const WeatherService = () => {
   return (
     <>
       <div className="flex justify-center mt-5">
-        <input ref={inputRef} type="text" className='bg-yellow-300 placeholder bg-black text-white w-64 h-10 border-solid border-2 border-black mr-3' placeholder='  Type city...'></input>
-        <button onClick={() => getWeather()} className='w-24 border-solid bg-black text-white border-2 border-black'>Current</button>
-        <button onClick={() => getForecast()} className='ml-5 w-28 border-solid bg-black text-white border-2 border-black'>Next Hours</button>
-        <button onClick={() => getDaily()} className='ml-5 w-28 border-solid bg-black text-white border-2 border-black'>Get Daily</button>
+        <input ref={inputRef} type="text" className='bg-black text-white w-64 h-10 border-solid border-2 border-slate-400 mr-3' placeholder='  Type city...'></input>
+        <button onClick={() => getWeather()} className='w-24 border-solid bg-black text-white border-2 border-slate-400'>Current</button>
+        <button onClick={() => getForecast()} className='ml-5 w-28 border-solid bg-black text-white border-2 border-slate-400'>Next Hours</button>
+        <button onClick={() => getDaily()} className='ml-5 w-28 border-solid bg-black text-white border-2 border-slate-400'>Get Daily</button>
       </div>
       
       <div className="ml-24 mr-24 flex justify-center mt-12">
-          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
-              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-100">
+          <table className="w-full text-sm text-center  ">
+              <thead className="text-xs uppercase bg-gray-700 text-gray-100">
                   <tr>
                       <th scope="col" className="py-4 px-6">
                           City
@@ -62,31 +62,30 @@ const WeatherService = () => {
                   </tr>
               </thead>
               <tbody>
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                      <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  <tr className="border-b bg-gray-800 border-slate-400 text-center ">
+                      <th scope="row" className="py-4 px-6 font-medium  whitespace-nowrap text-white">
                         {weather.name}
                       </th>
-                      <td className="py-4 px-6">
+                      <td className="py-4 px-6 text-white">
                         {weather.weather && weather.weather.map(w => <h3 className='mt-2' key={w.id}>{w.main}</h3>)} 
                       </td>
-                      <td className="py-4 px-6">
+                      <td className="py-4 px-6 text-white">
                         {weather?.main?.temp}
                       </td>
-                      <td className="py-4 px-6">
-                        <img src={`http://openweathermap.org/img/wn/${picture}.png`} alt=""/>
+                      <td className="py-4 px-6 text-white">
+                          <img class="mx-auto" src={`http://openweathermap.org/img/wn/${picture}.png`} alt=""/>
                       </td>
                   </tr>
               </tbody>
           </table>
         </div>
 
-        <div className="ml-24 mr-24 flex justify-center mt-12">
-          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
+        <div className="ml-24 mr-24  mt-12">
+          <table className="w-full text-sm text-center">
             <tbody>
-              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-100">
-                
+              <thead className="text-xs uppercase">
                   <tr>
-                      <th scope="col" className="py-4 px-6">
+                      <th className="bg-gray-800 text-white py-4 px-6">
                           Weather for Next Hours
                       </th>
                   </tr>
@@ -95,7 +94,7 @@ const WeatherService = () => {
 
               <tbody>
                   {hourly.list && hourly.list.map(d =>
-                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                    <tr className="border-b bg-gray-800 border-slate-400 text-white">
                        <td className="py-4 px-6">
                         <h3 className='mt-2' key={d.dt}>{d.dt_txt}</h3>
                       </td>
@@ -108,12 +107,12 @@ const WeatherService = () => {
           </table>
         </div>
 
-        <div className="ml-24 mr-24 flex justify-center mt-12">
-          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
+        <div className="ml-24 mr-24 mt-12">
+          <table className="w-full text-sm ">
           <tbody>
-              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-100">
+              <thead className="text-xs uppercase">
                   <tr>
-                      <th scope="col" className="py-4 px-6">
+                      <th className="py-4 px-6 bg-gray-800 text-white">
                           Daily Weather for 5 Days
                       </th>
                   </tr>
@@ -123,8 +122,8 @@ const WeatherService = () => {
               <tbody>
                 {Object.keys(daily).map((key, index) => {
                   return (
-                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                      <div className='h-20 text-center mt-5 border border-black dark:bg-gray-800 text-white'>
+                  <tr className="border-b bg-gray-800">
+                      <div className='h-20 text-center mt-5 border border-slate-400 text-white'>
                         <h3 className='mt-2'>{daily[key].dt_txt}</h3>
                         <h3 className='mt-2'>{daily[key].main.temp}°C</h3>
                       </div> 
