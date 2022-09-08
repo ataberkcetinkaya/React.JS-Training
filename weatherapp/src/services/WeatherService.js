@@ -11,21 +11,27 @@ const WeatherService = () => {
   const [weather, setWeather] = useState({});
   const inputRef = useRef(null);
   const [picture, setPicture] = useState('');
+  const [hourly, setHourly] = useState({});
   const [daily, setDaily] = useState({});
 
   const getWeather = async () => {
       const { data } = await axios.get(`${url}${inputRef.current.value}&appid=${apiKey}&units=metric`) //wait for data to reach (async and await)
       setWeather(data);
-      console.log(data);
       let info = data.weather[0].icon; //01d
       setPicture(info);
     }
 
     const getForecast = async () => {
       const { data } = await axios.get(`${url2}${inputRef.current.value}&cnt=3&appid=${apiKey}&units=metric`) //wait for data to reach (async and await)
-      setDaily(data);
-      console.log(data);
+      setHourly(data);
     }
+
+    const getDaily = async () => {
+      const { data } = await axios.get(`${url2}${inputRef.current.value}&cnt=33&appid=${apiKey}&units=metric`) //wait for data to reach (async and await)
+      const dailyWeather = data.list.filter(item => item.dt_txt.includes('12:00:00')); //im getting the 12 pm bc that time usually stands for the day temperature
+      setDaily(dailyWeather);
+    }
+
 
   //if weather exists, map through weather array and display main weather
   return (
@@ -34,6 +40,7 @@ const WeatherService = () => {
         <input ref={inputRef} type="text" className='bg-yellow-300 placeholder bg-black text-white w-64 h-10 border-solid border-2 border-black mr-3' placeholder='  Type city...'></input>
         <button onClick={() => getWeather()} className='w-24 border-solid bg-black text-white border-2 border-black'>Current</button>
         <button onClick={() => getForecast()} className='ml-5 w-28 border-solid bg-black text-white border-2 border-black'>Next Hours</button>
+        <button onClick={() => getDaily()} className='ml-5 w-28 border-solid bg-black text-white border-2 border-black'>Get Daily</button>
       </div>
       
       <div className="ml-24 mr-24 flex justify-center mt-12">
@@ -72,13 +79,60 @@ const WeatherService = () => {
               </tbody>
           </table>
         </div>
-        <div className="flex flex-col w-52 mx-auto ">
-            {daily.list && daily.list.map(d =>
-             <div className='h-20 text-center mt-5 border border-black dark:bg-gray-800 text-white'>
-              <h3 className='mt-2' key={d.dt}>{d.dt_txt}</h3>
-              <h3 className='mt-2' key={d.main.temp}>{d.main.temp}°C</h3>
-             </div> 
-             )}
+
+        <div className="ml-24 mr-24 flex justify-center mt-12">
+          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
+            <tbody>
+              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-100">
+                
+                  <tr>
+                      <th scope="col" className="py-4 px-6">
+                          Weather for Next Hours
+                      </th>
+                  </tr>
+              </thead>
+            </tbody>
+
+              <tbody>
+                  {hourly.list && hourly.list.map(d =>
+                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                       <td className="py-4 px-6">
+                        <h3 className='mt-2' key={d.dt}>{d.dt_txt}</h3>
+                      </td>
+                      <td className="py-4 px-6">
+                        <h3 className='mt-2' key={d.main.temp}>{d.main.temp}°C</h3>
+                      </td>
+                    </tr> 
+                  )}
+              </tbody>
+          </table>
+        </div>
+
+        <div className="ml-24 mr-24 flex justify-center mt-12">
+          <table className="w-full text-sm text-left text-gray-500 dark:text-gray-400 ">
+          <tbody>
+              <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-100">
+                  <tr>
+                      <th scope="col" className="py-4 px-6">
+                          Daily Weather for 5 Days
+                      </th>
+                  </tr>
+              </thead>
+           </tbody>
+
+              <tbody>
+                {Object.keys(daily).map((key, index) => {
+                  return (
+                  <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                      <div className='h-20 text-center mt-5 border border-black dark:bg-gray-800 text-white'>
+                        <h3 className='mt-2'>{daily[key].dt_txt}</h3>
+                        <h3 className='mt-2'>{daily[key].main.temp}°C</h3>
+                      </div> 
+                  </tr>
+                  )
+                  })}
+              </tbody>
+          </table>
         </div>
     </>
   )
