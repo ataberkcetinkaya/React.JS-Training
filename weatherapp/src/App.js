@@ -1,12 +1,15 @@
 import React from 'react';
 import './App.css';
-import WeatherService from './services/WeatherService';
+import Home from './pages/Home';
+import { WeatherProvider } from './context/WeatherContext';
 
 function App() {
 
   return (
       <>
-        <WeatherService></WeatherService>
+      <WeatherProvider>
+        <Home></Home>
+      </WeatherProvider>
       </>
   );
 }
