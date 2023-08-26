@@ -49,7 +49,7 @@ export default function Home() {
                       {weather?.main?.temp}
                     </td>
                     <td className="py-4 px-6 text-white">
-                        <img class="mx-auto" src={`http://openweathermap.org/img/wn/${picture}.png`} alt=""/>
+                        <img className="mx-auto" src={`http://openweathermap.org/img/wn/${picture}.png`} alt=""/>
                     </td>
                 </tr>
             </tbody>
