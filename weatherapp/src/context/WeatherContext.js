@@ -14,8 +14,9 @@ const WeatherContext = createContext();
 
     const inputRef = useRef(null);
 
-    const [weather, setWeather] = useState({});
     const [picture, setPicture] = useState('');
+
+    const [weather, setWeather] = useState({});
     const [hourly, setHourly] = useState({});
     const [daily, setDaily] = useState({});
   
@@ -42,8 +43,8 @@ const WeatherContext = createContext();
         getWeather,
         getForecast,
         getDaily,
-        weather,
         picture,
+        weather,
         hourly,
         daily,
       }

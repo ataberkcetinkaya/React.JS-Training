@@ -1,116 +1,47 @@
 import React from 'react'
 import '../App.css';
-import { CalendarDaysIcon, ClockIcon } from '@heroicons/react/24/solid';
 import { useWeatherOption } from '../context/WeatherContext';
 
 export default function Home() {
 
-  const { inputRef, getWeather, getForecast, getDaily, weather, picture, hourly, daily } = useWeatherOption();
+  const { inputRef, getWeather, getForecast, getDaily, picture, weather, hourly, daily } = useWeatherOption();
+
+  const getAll = () => {
+    getWeather();
+  };
+
+  const currentDate = new Date();
 
   return (
     <>
-    <div className="flex justify-center mt-5">
-      <input ref={inputRef} type="text" className='bg-black text-white w-64 h-10 border-solid border-2 border-slate-400 mr-3' placeholder='  Type city...'></input>
+    <div className="flex justify-center mt-8">
+      <input ref={inputRef} type="text" className='w-64 h-10 border border-gray-300 rounded-lg p-2 text-center' placeholder='Type city...'></input>
     </div>
 
-    <div className="flex justify-center mt-5  h-10">
-      <button onClick={() => getWeather()} className='w-24 border-solid bg-black text-white border-2 border-slate-400'>Current</button>
-      <button onClick={() => getForecast()} className='ml-5 w-28 border-solid bg-black text-white border-2 border-slate-400'>Next Hours</button>
-      <button onClick={() => getDaily()} className='ml-5 w-28 border-solid bg-black text-white border-2 border-slate-400'>Get Daily</button>
+    <div className="flex justify-center mt-5 h-10">
+      <button onClick={() => getAll()} className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg shadow-md'>Check Weather</button>
     </div>
-    
-    <div className="ml-24 mr-24 flex justify-center mt-12">
-        <table className="w-full text-sm text-center  ">
-            <thead className="text-xs uppercase bg-gray-700 text-gray-100">
-                <tr>
-                    <th scope="col" className="py-4 px-6">
-                        City
-                    </th>
-                    <th scope="col" className="py-3 px-6">
-                        Status
-                    </th>
-                    <th scope="col" className="py-3 px-6">
-                        Temperature (°C)
-                    </th>
-                    <th scope="col" className="py-3 px-6">
-                       Picture
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr className="border-b bg-gray-800 border-slate-400 text-center ">
-                    <th scope="row" className="py-4 px-6 font-medium whitespace-normal text-white">
-                      {weather.name}
-                    </th>
-                    <td className="py-4 px-6 text-white">
-                      {weather.weather && weather.weather.map(w => <h3 className='mt-2' key={w.id}>{w.main}</h3>)} 
-                    </td>
-                    <td className="py-4 px-6 text-white">
-                      {weather?.main?.temp}
-                    </td>
-                    <td className="py-4 px-6 text-white">
-                        <img className="mx-auto" src={`http://openweathermap.org/img/wn/${picture}.png`} alt=""/>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+
+    <div class="mx-auto max-w-lg mt-10">
+      <div class="bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-2xl font-semibold text-gray-800 mb-4">Weather Forecast</h2>
+        <div class="mb-4">
+          <div class="text-lg text-gray-600">
+            <span class="block">Location: {weather.name}</span>
+            <span class="block">Date: {currentDate.toDateString()}</span>
+          </div>
+          <div class="text-3xl text-blue-500 font-bold mt-2 sm:mt-0">{weather?.main?.temp}</div>
+        </div>
+        <div class="mb-4">
+          <div class="text-gray-600">
+            <span class="block">Condition: {weather?.weather?.[0]?.main}</span>
+            <span class="block">Wind: {weather?.wind?.speed}</span>
+            <span class="block">Humidity: {weather?.main?.humidity}</span>
+          </div>
+          <img src={`http://openweathermap.org/img/wn/${picture}.png`} alt="Weather Icon" class="w-12 h-12 mt-2 sm:mt-0" />
+        </div>
       </div>
-
-      <div className="ml-24 mr-24  mt-12">
-        <table className="w-full text-sm text-center">
-          <tbody>
-            <thead className="text-xs uppercase">
-                <tr>
-                    <th className="bg-gray-800 text-white py-4 px-6 border border-slate-400">
-                        Next Hours
-                        <ClockIcon className='h-7 w-7 mx-auto mt-3'></ClockIcon>
-                    </th>
-                </tr>
-            </thead>
-          </tbody>
-
-            <tbody>
-                {hourly.list && hourly.list.map(d =>
-                  <tr className="border-b bg-gray-800 border-slate-400 text-white">
-                     <td className="py-4 px-6">
-                      <h3 className='mt-2' key={d.dt}>{d.dt_txt}</h3>
-                    </td>
-                    <td className="py-4 px-6">
-                      <h3 className='mt-2' key={d.main.temp}>{d.main.temp}°C</h3>
-                    </td>
-                  </tr> 
-                )}
-            </tbody>
-        </table>
-      </div>
-
-      <div className="ml-24 mr-24 mt-12">
-        <table className="w-full text-sm">
-        <tbody>
-            <thead className="text-xs uppercase">
-                <tr>
-                  <th className="py-4 px-6 bg-gray-800 text-white border border-slate-400">
-                      Daily Weather
-                      <CalendarDaysIcon className="h-7 w-7 mx-auto mt-3"></CalendarDaysIcon>
-                    </th>
-                </tr>
-            </thead>
-         </tbody>
-
-            <tbody>
-              {Object.keys(daily).map((key, index) => {
-                return (
-                <tr className="border-b border-slate-400 bg-gray-800">
-                    <div className='h-20 text-center mt-5 text-white'>
-                      <h3 className='mt-2'>{daily[key].dt_txt.slice(0,10)}</h3>
-                      <h3 className='mt-2'>{daily[key].main.temp}°C</h3>
-                    </div> 
-                </tr>
-                )
-                })}
-            </tbody>
-        </table>
-      </div>
+    </div>
   </>
   )
 }
