@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../App.css';
 import { useWeatherOption } from '../context/WeatherContext';
 
@@ -11,6 +11,16 @@ export default function Home() {
   };
 
   const currentDate = new Date();
+
+  const [isFahrenheit, setIsFahrenheit] = useState(false);
+
+  const toggleTemperatureUnit = () => {
+    setIsFahrenheit(!isFahrenheit);
+  };
+
+  const temperature = isFahrenheit
+    ? ((weather?.main?.temp || 0) * 9) / 5 + 32 // Convert to Fahrenheit
+    : weather?.main?.temp; // Keep it in Celsius
 
   return (
     <>
@@ -27,10 +37,20 @@ export default function Home() {
         <h2 class="text-2xl font-semibold text-gray-800 mb-4">Weather Forecast</h2>
         <div class="mb-4">
           <div class="text-lg text-gray-600">
-            <span class="block">Location: {weather.name}</span>
             <span class="block">Date: {currentDate.toDateString()}</span>
+            <span class="block">Location: {weather.name}</span>
           </div>
-          <div class="text-3xl text-blue-500 font-bold mt-2 sm:mt-0">{weather?.main?.temp}</div>
+          <div class="text-3xl text-blue-500 font-bold mt-2 sm:mt-0">
+            {temperature} {isFahrenheit ? "°F" : "°C"}
+          </div>
+          <div class="mt-2">
+            <button
+              onClick={toggleTemperatureUnit}
+              className="bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded-lg shadow-md"
+            >
+              {isFahrenheit ? "Switch to Celsius" : "Switch to Fahrenheit"}
+            </button>
+          </div>
         </div>
         <div class="mb-4">
           <div class="text-gray-600">
